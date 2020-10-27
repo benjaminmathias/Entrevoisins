@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.mNeighbourName.setText(neighbour.getName());
         Glide.with(holder.mNeighbourAvatar.getContext())
                 .load(neighbour.getAvatarUrl())
+                // Handle error in case the image doesn't load
+                .error(Glide.with(holder.mNeighbourAvatar).load(R.drawable.ic_account))
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
@@ -49,6 +52,20 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
+            }
+        });
+
+        holder.mNeighbour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProfileNeighbourActivity.route(
+                        view.getContext(),
+                        neighbour.getName(),
+                        neighbour.getAddress(),
+                        neighbour.getPhoneNumber(),
+                        neighbour.getAboutMe()
+                );
+
             }
         });
     }
@@ -65,6 +82,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         public TextView mNeighbourName;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
+        @BindView(R.id.neighbour_constraint_layout)
+        public ConstraintLayout mNeighbour;
 
         public ViewHolder(View view) {
             super(view);
