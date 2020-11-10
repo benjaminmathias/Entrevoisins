@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.DeleteFavoriteEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -22,46 +23,37 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
-
-public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.onItemListener {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link FavoriteFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class FavoriteFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.onItemListener {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
+    private List<Neighbour> mFavorites;
+    private MyNeighbourRecyclerViewAdapter mAdapter;
     private RecyclerView mRecyclerView;
 
-
-    /**
-     * Create and return a new instance
-     * @return @{@link NeighbourFragment}
-     */
-    public static NeighbourFragment newInstance() {
-        NeighbourFragment fragment = new NeighbourFragment();
+    public static FavoriteFragment newInstance() {
+        FavoriteFragment fragment = new FavoriteFragment();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mApiService = DI.getNeighbourApiService();
+        this.mApiService = DI.getNeighbourApiService();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_neighbour_list, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         return view;
-    }
-
-    /**
-     * Init the List of neighbours
-     */
-    private void initList() {
-        mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, this));
     }
 
     @Override
@@ -83,19 +75,26 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
     }
 
     /**
-     * Fired if the user clicks on a delete button
-     * @param event
+     * Init the List of neighbours
      */
+    private void initList() {
+        mFavorites = mApiService.getFavorites();
+        mAdapter = new MyNeighbourRecyclerViewAdapter(this.mFavorites, this);
+        mRecyclerView.setAdapter(this.mAdapter);
+    }
+
+
     @Subscribe
-    public void onDeleteNeighbour(DeleteNeighbourEvent event) {
-        mApiService.deleteNeighbour(event.neighbour);
+    public void onDeleteFavorite(DeleteFavoriteEvent event)
+    {
+        mApiService.deleteFavorite(event.neighbour);
         initList();
     }
 
     @Override
     public void onItemClick(int position) {
         Context context = getActivity();
-        Neighbour neighbour = mNeighbours.get(position);
+        Neighbour neighbour = mFavorites.get(position);
         Intent intent = new Intent(context, ProfileNeighbourActivity.class);
         intent.putExtra("neighbour", neighbour);
         context.startActivity(intent);

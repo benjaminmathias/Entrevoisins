@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EAEEEF"
+    android:id="@+id/profile_neighbour"
     tools:context=".ui.neighbour_list.ProfileNeighbourActivity">
 
     <ImageView
@@ -15,18 +16,20 @@
         app:layout_constraintHeight_percent="0.35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/imageview_content_description" />
 
     <TextView
         android:id="@+id/name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Profile"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="@id/user_avatar_imageview"
-        app:layout_constraintStart_toStartOf="@+id/user_avatar_imageview" />
+        app:layout_constraintStart_toStartOf="@+id/user_avatar_imageview"
+        tools:text="Profile"/>
 
     <ImageButton
         android:id="@+id/back_button"
@@ -38,7 +41,8 @@
         android:tint="#000000"
         app:layout_constraintStart_toStartOf="@+id/user_avatar_imageview"
         app:layout_constraintTop_toTopOf="@id/user_avatar_imageview"
-        android:src="?attr/homeAsUpIndicator" />
+        android:src="?attr/homeAsUpIndicator"
+        android:contentDescription="@string/backbutton_content_description" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view_1"
@@ -65,11 +69,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="TextView"
+
                 android:textColor="#000000"
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Profile"/>
 
             <include
                 android:id="@+id/include"
@@ -86,10 +91,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
-                android:text="TextView"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/address_image_view"
-                app:layout_constraintTop_toBottomOf="@+id/nested_name_text_view" />
+                app:layout_constraintTop_toBottomOf="@+id/nested_name_text_view"
+                tools:text="Paris, France"/>
 
             <ImageView
                 android:id="@+id/phone_image_view"
@@ -105,7 +110,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/nested_phone_text_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/address_image_view"
-                tools:visibility="visible" />
+                tools:visibility="visible"
+                android:contentDescription="@string/phone_content_description" />
 
             <TextView
                 android:id="@+id/nested_phone_text_view"
@@ -113,10 +119,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:text="TextView"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/phone_image_view"
-                app:layout_constraintTop_toBottomOf="@+id/nested_address_text_view" />
+                app:layout_constraintTop_toBottomOf="@+id/nested_address_text_view"
+                tools:text="0123456789"/>
 
             <ImageView
                 android:id="@+id/web_image_view"
@@ -132,7 +138,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phone_image_view"
                 app:srcCompat="@drawable/ic_baseline_facebook_24"
-                tools:visibility="visible" />
+                tools:visibility="visible"
+                android:contentDescription="@string/facebook_content_description" />
 
             <TextView
                 android:id="@+id/nested_web_text_view"
@@ -141,11 +148,11 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="TextView"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/web_image_view"
-                app:layout_constraintTop_toBottomOf="@+id/nested_phone_text_view" />
+                app:layout_constraintTop_toBottomOf="@+id/nested_phone_text_view"
+                tools:text="facebook.com/profile"/>
 
             <ImageView
                 android:id="@+id/address_image_view"
@@ -159,7 +166,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/nested_address_text_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nested_name_text_view"
-                app:srcCompat="@drawable/ic_baseline_place_24" />
+                app:srcCompat="@drawable/ic_baseline_place_24"
+                android:contentDescription="@string/location_content_description" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
@@ -184,9 +192,9 @@
                 android:id="@+id/about_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:text="A propos de moi"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/neighbour_profile_about"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -210,12 +218,12 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="TextView"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/custom_line2" />
+                app:layout_constraintTop_toBottomOf="@+id/custom_line2"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
 
 
         </android.support.constraint.ConstraintLayout>
@@ -227,7 +235,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:backgroundTint="#FFFFFF"
-        android:contentDescription="Add to favorite"
+        android:contentDescription="@string/fab_content_description"
         android:tint="#FFC400"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/user_avatar_imageview"

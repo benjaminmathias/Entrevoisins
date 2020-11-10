@@ -3,4 +3,14 @@
     <string name="tab_neighbour_title">My neighbours</string>
     <string name="tab_favorites_title">Favorites</string>
     <string name="activity_new_neighbour">New neighbour</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="neighbour_profile_about">À propos de moi </string>
+    <string name="fab_content_description">Add Neighbour to favorite</string>
+    <string name="location_content_description">Pin icon</string>
+    <string name="phone_content_description">Phone icon</string>
+    <string name="facebook_content_description">Facebook icon</string>
+    <string name="backbutton_content_description">Return to ListNeighbour Activity</string>
+    <string name="imageview_content_description">User image</string>
+
 </resources>
