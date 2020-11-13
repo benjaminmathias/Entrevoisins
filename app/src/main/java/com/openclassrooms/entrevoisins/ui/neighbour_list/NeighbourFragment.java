@@ -23,7 +23,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 
-public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.onItemListener {
+public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.onItemClickListener {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;

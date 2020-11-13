@@ -1,9 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +10,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
@@ -21,8 +18,6 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,8 +56,8 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
         mNeighbour = intent.getParcelableExtra("neighbour");
 
         retrieveUserInfo();
-        updateFavButton();
         setAvatar();
+        updateFavButton();
         
         Log.d("FAV LIST", Arrays.toString(mApiService.getFavorites().toArray()));
         Log.d("USER ID", Long.toString(mNeighbour.getId()));

@@ -1,13 +1,10 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,23 +25,23 @@ import butterknife.ButterKnife;
 
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
-    public interface onItemListener{
+    public interface onItemClickListener {
         void onItemClick(int position);
     }
 
-    private  onItemListener mOnItemListener;
+    private onItemClickListener mOnItemClickListener;
     private final List<Neighbour> mNeighbours;
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, onItemListener onItemListener) {
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, onItemClickListener onItemClickListener) {
         mNeighbours = items;
-        this.mOnItemListener = onItemListener;
+        this.mOnItemClickListener = onItemClickListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_neighbour, parent, false);
-        return new ViewHolder(view, mOnItemListener);
+        return new ViewHolder(view, mOnItemClickListener);
     }
 
     @Override
@@ -58,14 +55,14 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
-        if(mOnItemListener instanceof NeighbourFragment){
+        if(mOnItemClickListener instanceof NeighbourFragment){
             holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
                 }
             });
-        } else if (mOnItemListener instanceof FavoriteFragment) {
+        } else if (mOnItemClickListener instanceof FavoriteFragment) {
             holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -90,18 +87,18 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         @BindView(R.id.neighbour_constraint_layout)
         public ConstraintLayout mNeighbour;
 
-        onItemListener onItemListener;
+        onItemClickListener onItemClickListener;
 
-        public ViewHolder(View view, onItemListener onItemListener) {
+        public ViewHolder(View view, onItemClickListener onItemClickListener) {
             super(view);
             ButterKnife.bind(this, view);
-            this.onItemListener = onItemListener;
+            this.onItemClickListener = onItemClickListener;
             view.setOnClickListener((View.OnClickListener) this);
         }
 
         @Override
         public void onClick(View view) {
-            onItemListener.onItemClick(getAdapterPosition());
+            onItemClickListener.onItemClick(getAdapterPosition());
         }
     }
 }

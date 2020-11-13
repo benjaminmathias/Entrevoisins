@@ -66,9 +66,8 @@ public class NeighbourServiceTest {
         List<Neighbour> favNeighbour = service.getFavorites();
         favNeighbour.clear();
         favNeighbour.add(neighbour);
-        assertEquals(service.getNeighbours().get(0), neighbour);
-        service.deleteNeighbour(neighbour);
-        assertFalse(service.getNeighbours().contains(neighbour));
+        assertEquals(service.getFavorites().get(0), neighbour);
+        service.deleteFavorite(neighbour);
+        assertFalse(service.getFavorites().contains(neighbour));
     }
-
 }

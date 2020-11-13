@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteFavoriteEvent;
-import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
@@ -28,7 +27,7 @@ import java.util.List;
  * Use the {@link FavoriteFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FavoriteFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.onItemListener {
+public class FavoriteFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.onItemClickListener {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mFavorites;
